@@ -1,0 +1,19 @@
+.auth-screen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-container {
+    min-width: 650px;
+}
+
+@media(max-width: 725px) {
+    .auth-container {
+        min-width: 90%;
+        width: 90%;
+        max-width: 90%;
+    }
+}
