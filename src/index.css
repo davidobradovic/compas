@@ -10,6 +10,7 @@
     scroll-behavior: smooth;
 }
 
+
 html {
     width: 100vw;
     height: 100vh;
@@ -35,4 +36,14 @@ main {
 .supllies-table-container::-webkit-scrollbar {
     height: 0;
     width: 0;
+}
+
+.modal-in-modal {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.products-grid {
+    transition: all 0.33s ease-in-out;
 }

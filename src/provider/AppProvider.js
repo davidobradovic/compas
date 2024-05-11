@@ -5,9 +5,16 @@ const AppContext = createContext();
 export const ApplicationProvider = ({ children }) => {
 
     const [selectedNav, setSelectedNav] = useState(0)
+    const [ selectedSubNav, setSelectedSubNav ] = useState(null)
+    const [ userType, setUserType ] = useState(2)
 
     const functionSelectNav = (i) => {
         setSelectedNav(i)
+        setSelectedSubNav(null)
+    }
+
+    const functionSelecSubtNav = (i) => {
+        setSelectedSubNav(i)
     }
 
     useEffect(() => {
@@ -17,7 +24,10 @@ export const ApplicationProvider = ({ children }) => {
     return (
         <AppContext.Provider value={{
             selectedNav,
-            functionSelectNav
+            functionSelectNav,
+            functionSelecSubtNav,
+            selectedSubNav,
+            userType
         }}>
             {children}
         </AppContext.Provider>

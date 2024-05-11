@@ -1,0 +1,20 @@
+.supplies-grid::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.supplies-table thead tr th {
+    border-right: 1px solid white;
+}
+
+.supplies-table thead tr th:last-child {
+    border-right: none;
+}
+
+.supplies-table tbody tr  {
+    border-bottom: 1px solid black;
+}
+
+.supplies-table tbody tr td {
+    border-right: 1px solid black;
+}

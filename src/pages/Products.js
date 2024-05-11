@@ -11,12 +11,10 @@ import { CgOptions } from 'react-icons/cg'
 import { TbUsers } from 'react-icons/tb'
 import { CiShoppingTag } from 'react-icons/ci'
 import { LuShoppingBag } from 'react-icons/lu'
-import { ModalWindow } from '../components/products/addProductModal'
 import { Link } from 'react-router-dom'
 
 
 function Products() {
-    const [showModal, setShowModal] = useState(null)
 
     return (
         <div className='dash-page'>
@@ -95,7 +93,6 @@ function Products() {
                 <div className='flex items-center gap-2'>
                     <button className='p-2 border-2 border-black text-black rounded flex items-center gap-2 shadow-md'><IoFilterOutline size={20} /> Filters </button>
                     <button className='p-2 border-2 border-black text-black rounded flex items-center gap-2 shadow-md'><CgOptions size={20} /> Options </button>
-                    <button onClick={() => setShowModal(true)} className='addProductButton p-2 border-2 border-black text-black rounded flex items-center gap-2 shadow-md'><IoCreateOutline size={25} /> Add Product</button>
                 </div>
             </div>
 
@@ -128,7 +125,6 @@ function Products() {
 
             </div>
 
-            {showModal ? <ModalWindow setShowModal={setShowModal} /> : null}
         </div>
     )
 

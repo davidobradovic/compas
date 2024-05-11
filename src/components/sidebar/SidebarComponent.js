@@ -2,20 +2,18 @@
 import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
-import { AiOutlineStock, AiOutlineTeam, AiOutlinePieChart } from 'react-icons/ai'
+import { AiOutlineStock, AiOutlinePieChart } from 'react-icons/ai'
 import { RxDashboard } from 'react-icons/rx'
-import { TbReportAnalytics, TbChessBishop, TbListDetails, TbSubtask, TbFileInvoice } from 'react-icons/tb'
+import { TbReportAnalytics, TbChessBishop, TbListDetails, TbFileInvoice, TbReport } from 'react-icons/tb'
 import { IoBagCheckOutline } from 'react-icons/io5'
-import { LuBoxes } from 'react-icons/lu'
 import { CgMenuMotion } from 'react-icons/cg'
 import { PiTableLight } from 'react-icons/pi'
 import { MdOutlineVerifiedUser } from 'react-icons/md'
-import { BsFiles, BsBoxSeam, BsCartCheck, BsBoxes, BsShopWindow, BsTruck } from 'react-icons/bs';
-import { LuFileBadge, LuLayoutDashboard } from 'react-icons/lu';
-import { FaCashRegister } from 'react-icons/fa'
-import { GrOverview } from 'react-icons/gr'
+import { BsCartCheck, BsBoxes, BsShopWindow, BsTruck } from 'react-icons/bs';
+import { FaCashRegister } from 'react-icons/fa6'
 import { RiAdminLine, RiBillLine } from 'react-icons/ri'
 import { SlSettings } from 'react-icons/sl'
+import { SiWebmoney } from 'react-icons/si'
 import { GoTable } from 'react-icons/go'
 import { useAppData } from '../../provider/AppProvider';
 
@@ -23,7 +21,8 @@ import { useAppData } from '../../provider/AppProvider';
 
 function SidebarComponent({ children }) {
     const [isOpen, setIsOpen] = useState(false);
-    const { selectedNav, functionSelectNav } = useAppData();
+    const { selectedNav, functionSelectNav, functionSelecSubtNav,
+        selectedSubNav, userType } = useAppData();
 
     // Use state to track open submenus
     const [openSubmenu, setOpenSubmenu] = useState(null);
@@ -60,21 +59,15 @@ function SidebarComponent({ children }) {
             url: '/orders'
         },
         {
-            title: 'Zalihe',
-            icon: <LuBoxes size={21} />,
-            url: '/supplies'
-        },
-        {
             title: 'Tabele',
             icon: <PiTableLight size={21} />, // Replace with your tables icon,
             url: '/tables',
             submenu: [
-                { title: 'Top Korisnici', url: '/products/top-users', icon: <MdOutlineVerifiedUser size={21} /> },
-                { title: 'Top Proizvodi', url: '/products/top-products', icon: <BsCartCheck size={21} /> },
-                { title: 'Mrtva zaliha', url: '/products/mrtva-zaliha', icon: <BsBoxes size={21} /> },
-                { title: 'VP zaliha', url: '/products/vp-zaliha', icon: <AiOutlineStock size={21} /> },
-                { title: 'MP zaliha', url: '/products/mp-zaliha', icon: <BsShopWindow size={21} /> },
-                { title: 'Daily Overview', url: '/products/daily-overview', icon: <TbListDetails size={21} /> }
+                { title: 'Top Analitika', url: '/tables/top-data', icon: <MdOutlineVerifiedUser size={21} /> },
+                { title: 'Mrtva zaliha', url: '/tables/mrtva-zaliha', icon: <BsBoxes size={21} /> },
+                { title: 'VP zaliha', url: '/tables/vp-supplies', icon: <AiOutlineStock size={21} /> },
+                { title: 'MP zaliha', url: '/tables/mp-zaliha', icon: <BsShopWindow size={21} /> },
+                { title: 'Daily Overview', url: '/tables/daily-overview', icon: <TbListDetails size={21} /> }
             ]
         },
         {
@@ -82,16 +75,27 @@ function SidebarComponent({ children }) {
             icon: <RiAdminLine size={21} />, // Replace with your tables icon,
             url: '/vp-actions',
             submenu: [
-                { title: 'Proizvod Radnje', url: '/products/top-users', icon: <BsCartCheck size={21} /> },
-                { title: 'Zaliha Radnje', url: '/products/top-products', icon: <BsBoxes size={21} /> },
-                { title: 'Skladista Radnje', url: '/products/top-products', icon: <BsShopWindow size={21} /> },
-                { title: 'Veleprodajni racuni', url: '/products/mrtva-zaliha', icon: <RiBillLine size={21} /> },
-                { title: 'Garancija Radnje', url: '/products/vp-zaliha', icon: <TbFileInvoice size={21} /> },
-                { title: 'Zahtjev za analitiku', url: '/products/mp-zaliha', icon: <AiOutlinePieChart size={21} /> },
-                { title: 'Zahtjev za tabelu', url: '/products/daily-overview', icon: <GoTable size={21} /> },
-                { title: 'MP Racuni', url: '/products/daily-overview', icon: <FaCashRegister size={21} /> },
-                { title: 'Narudzbe', url: '/products/daily-overview', icon: <BsTruck size={21} /> }
+                { title: 'Proizvod Radnje', url: '/vp-actions/product-actions', icon: <BsCartCheck size={21} /> },
+                { title: 'Zaliha Radnje', url: '/vp-actions/supplies-actions', icon: <BsBoxes size={21} /> },
+                { title: 'Skladista Radnje', url: '/vp-actions/stocks-actions', icon: <BsShopWindow size={21} /> },
+                { title: 'Veleprodajni racuni', url: '/vp-actions/vp-invoices', icon: <RiBillLine size={21} /> },
+                { title: 'Reklamacije', url: '/vp-actions/complaints-actions', icon: <TbReport size={21} /> },
+                { title: 'Garancija Radnje', url: '/vp-actions/warranty-actions', icon: <TbFileInvoice size={21} /> },
+                { title: 'Zahtjev za analitiku', url: '/vp-actions/request-for-analyses', icon: <AiOutlinePieChart size={21} /> },
+                { title: 'Zahtjev za tabelu', url: '/vp-actions/request-for-table', icon: <GoTable size={21} /> },
+                { title: 'MP Racuni', url: '/vp-actions/mp-invoices', icon: <FaCashRegister size={21} /> },
+                { title: 'Narudzbe', url: '/vp-actions/orders-actions', icon: <BsTruck size={21} /> }
             ]
+        },
+        {
+            title: 'Fiskalne Kase',
+            icon: <FaCashRegister size={21} />,
+            url: '/fiscal-cash-register' 
+        },
+        {
+            title: 'Online Prodavnica',
+            icon: <SiWebmoney size={21} />,
+            url: '/online-shop' 
         },
         {
             title: 'Settings',
@@ -99,6 +103,7 @@ function SidebarComponent({ children }) {
             url: '/settings'
         },
         
+
     ];
 
     return (
@@ -112,7 +117,7 @@ function SidebarComponent({ children }) {
                 className='flex flex-col text-black p-5 gap-4 navigation-container overflow-auto'
             >
                 <div className='w-full flex items-center mb-10 justify-between'>
-                    {isOpen === true ? <h1 className='text-black'>Sidebar</h1> : null}
+                    {isOpen === true ? <img style={{ width: 120 }} src={require('../../assets/sidebar.png')} /> : null}
                     <button
                         onClick={toggleSideBar}
                         style={{ height: 40, width: 40 }}
@@ -140,9 +145,10 @@ function SidebarComponent({ children }) {
                             <div className='pl-6'>
                                 {button.submenu.map((item, j) => (
                                     <Link
+                                        onClick={() => functionSelecSubtNav(j)}
                                         key={j}
                                         to={'/dashboard' + item.url}
-                                        className='p-3 hover:bg-black hover:text-white flex items-center bg-white text-black flex items-center gap-2'
+                                        className={`p-3 hover:bg-black hover:text-white flex items-center gap-2 ${selectedSubNav === j ? 'bg-black text-white' : 'bg-white text-black'}`}
                                     >
                                         {item.icon}
                                         {item.title}

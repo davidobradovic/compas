@@ -1,0 +1,16 @@
+.top-data-table {
+    border: 1px solid black;
+}
+
+.top-data-table tr th {
+    border-right:  1px solid white;
+}
+
+.top-data-table tr td {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.top-data-table tr td:last-child, .top-data-table tr th:last-child  {
+    border-right: none
+}

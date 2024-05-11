@@ -1,0 +1,19 @@
+.product-card {
+    min-width: 250px;
+}
+
+@media(max-width: 810px) {
+    .product-card {
+        min-width: calc(50% - 0.35rem) !important;
+    }
+
+    .product-card h1 {
+        font-size: 75% !important;
+    }
+    
+    .product-card button {
+        font-size: 75% !important;
+    }
+}
+
+

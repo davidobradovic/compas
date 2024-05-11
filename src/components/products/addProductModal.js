@@ -16,8 +16,26 @@ export function ModalWindow({ setShowModal }) {
 
     const [images, setImages] = useState([]);
     const [fileNames, setFileNames] = useState([]);
+    const [additionalInfosCount, setAdditionalInfosCount] = useState(1);
 
-    console.log(images)
+    const renderDynamicComponents = () => {
+        const components = [];
+        for (let i = 0; i < additionalInfosCount; i++) {
+            components.push(
+                <div key={i} className='flex items-center gap-2 w-full mb-2'>
+                    <input type="text" className='w-2/5 bg-gray-50 p-2' placeholder='Unesite TIP' />
+                    <input type="text" className='w-2/5 bg-gray-50 p-2' placeholder='Unesite Iznos' />
+                    <button className='w-1/5 bg-black text-white p-2.5'>Potvrdi</button>
+                </div>
+            );
+        }
+        return components;
+    };
+
+    const handleCreateInformation = () => {
+        setAdditionalInfosCount(additionalInfosCount + 1);
+    };
+
 
 
     const handleImageUpload = (event) => {
@@ -47,7 +65,7 @@ export function ModalWindow({ setShowModal }) {
         <div className='modal-screen relative'>
             <div className="modal-window overflow-auto w-2/3 h-2/3 bg-white p-3 relative flex flex-col justify-between">
                 <h1 className='text-center text-2xl py-2'>Dodaj Proizvod</h1>
-                <div className='modal-window-form flex items-center flex-wrap overflow-hidden'>
+                <div className='modal-window-form flex items-center flex-wrap overflow-auto'>
                     <form className='images-upload w-full bg-gray-50 p-3 flex flex-wrap'>
                         <input
                             type="file"
@@ -142,12 +160,13 @@ export function ModalWindow({ setShowModal }) {
                     {/* Dodatne informacije */}
                     <div style={{ borderTopWidth: 2, borderTopStyle: 'dashed', borderTopColor: 'rgba(0,0,0,0.5)' }} className="additional-fields w-full py-2">
                         <h1 className='flex items-center gap-2 pb-2'><AiOutlineMore /> Dodatne informacije</h1>
-                        <div className='flex items-center gap-2 w-full mb-2'>
+                        {/* <div className='flex items-center gap-2 w-full mb-2'>
                             <input type="text" className='w-2/5 bg-gray-50 p-2' placeholder='Unesite TIP' />
                             <input type="text" className='w-2/5 bg-gray-50 p-2' placeholder='Unesite Iznos' />
                             <button className='w-1/5 bg-black text-white p-2.5'>Potvrdi</button>
-                        </div>
-                        <button className='w-full bg-black text-white p-2.5'>Kreiraj informaciju</button>
+                        </div> */}
+                        {renderDynamicComponents()}
+                        <button onClick={handleCreateInformation} className='w-full bg-black text-white p-2.5'>Kreiraj informaciju</button>
                     </div>
                 </div>
                 <div className='action-buttons flex items-center gap-1 w-full'>

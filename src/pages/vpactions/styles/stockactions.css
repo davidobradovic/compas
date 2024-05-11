@@ -1,0 +1,26 @@
+@media(max-width: 640px) {
+    .stock-card {
+        min-width: 100% !important;
+        width: 100% !important;
+    }
+    .msi-card {
+        min-width: 100% !important;
+        width: 100% !important;
+        margin-bottom: 5px;
+    }
+    .msi-card:last-child{
+        margin-bottom: none;
+    }
+    .stock-filters-container {
+        flex-wrap: wrap;
+    }
+    .stock-filters-container input {
+        min-width: 100% !important;
+        width: 100% !important;
+        margin-bottom: 5px;
+    }
+    .stock-filters-container .sfc-buttons , .sfc-buttons button {
+        min-width: 100% !important;
+        width: 100% !important;
+    }
+}
